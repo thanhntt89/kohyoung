@@ -7,9 +7,10 @@ namespace Lab12
     {
         static void Main(string[] args)
         {
-            //Create thread Odd
+            //Create thread 
             Thread tOdd = new Thread(Odd);
             Thread tEven = new Thread(Even);
+
             //Run thread Odd
             tOdd.Start();
             //Run thread print Even
