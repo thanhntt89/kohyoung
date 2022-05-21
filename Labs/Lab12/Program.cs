@@ -13,7 +13,7 @@ namespace Lab12
 
             //Run thread Odd
             tOdd.Start();
-            //Run thread print Even
+            //Run thread Even
             tEven.Start();
             //Wait for all thread finished
             tEven.Join();
@@ -26,7 +26,7 @@ namespace Lab12
         }
 
         /// <summary>
-        /// Thread print Even
+        /// Thread Even
         /// </summary>
         static void Even()
         {
@@ -43,7 +43,7 @@ namespace Lab12
         }
 
         /// <summary>
-        /// Thread print Odd
+        /// Thread Odd
         /// </summary>
         static void Odd()
         {
