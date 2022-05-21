@@ -1,13 +1,13 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 
 namespace Lab4
 {
     class Program
     {
         //Path file log
-        static string logPath = string.Format("{0}\\test.log", Path.GetDirectoryName(
-System.Reflection.Assembly.GetExecutingAssembly().Location));
+        static string logPath = string.Format("{0}\\test.log", Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
         static void Main(string[] args)
         {
             //Check file not exist
@@ -18,10 +18,18 @@ System.Reflection.Assembly.GetExecutingAssembly().Location));
                 return;
             }
 
-            //Reading all data from file
-            string allData = File.ReadAllText(logPath);
-            //Print data
-            Console.WriteLine(allData);
+            try
+            {
+                //Reading all data from file
+                string allData = File.ReadAllText(logPath);
+                //Print data
+                Console.WriteLine(allData);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+
             Console.ReadLine();
         }
     }
