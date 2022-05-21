@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -20,13 +19,8 @@ System.Reflection.Assembly.GetExecutingAssembly().Location));
             //Save struct
             SavePerson(person, saveToFilePath);
 
-            Console.WriteLine(string.Format("Write to file success!!\nFilePath: {0} ", saveToFilePath));
-
-            //Read struct
-            Person person_reader = GetPerson(saveToFilePath);
-            string data = string.Format("Id:{0} | First Name:{1} | Last Name: {2}\n", person_reader.Id, person_reader.FristName, person_reader.LastName);
-
-            Console.WriteLine("Read file success!!\n" + data);
+            //Read struct           
+            ReadPerson(saveToFilePath);
 
             Console.ReadLine();
         }
@@ -38,13 +32,22 @@ System.Reflection.Assembly.GetExecutingAssembly().Location));
         /// <param name="saveToFilePath"></param>
         static void SavePerson(Person person, string saveToFilePath)
         {
-            using (Stream stream = new FileStream(saveToFilePath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
+            try
             {
-                using (BinaryWriter writer = new BinaryWriter(stream, Encoding.Default))
+                using (Stream stream = new FileStream(saveToFilePath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
                 {
-                    byte[] newBuffer = StructUtils.Serialize<Person>(person);
-                    writer.Write(newBuffer);
+                    using (BinaryWriter writer = new BinaryWriter(stream, Encoding.Default))
+                    {
+                        byte[] newBuffer = StructUtils.Serialize<Person>(person);
+                        writer.Write(newBuffer);
+                    }
                 }
+
+                Console.WriteLine(string.Format("Write to file success!!\nFilePath: {0} ", saveToFilePath));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(string.Format("Write to file fails!!\nError: {0} ", ex.Message));
             }
         }
 
@@ -52,16 +55,26 @@ System.Reflection.Assembly.GetExecutingAssembly().Location));
         /// Read person from files
         /// </summary>
         /// <param name="readerPath">File input</param>
-        /// <returns></returns>
-        static Person GetPerson(string readerPath)
+        static void ReadPerson(string readerPath)
         {
             //Check file exist
             if (!File.Exists(readerPath))
             {
-                return new Person();
+                Console.WriteLine(string.Format("File path: {0} not exist!!!", readerPath));
+                return;
             }
-            Person person = StructUtils.Deserialize<Person>(File.ReadAllBytes(readerPath));
-            return person;
+            try
+            {
+                Person person = StructUtils.Deserialize<Person>(File.ReadAllBytes(readerPath));
+
+                string data = string.Format("Id:{0} | First Name:{1} | Last Name: {2}\n", person.Id, person.FristName, person.LastName);
+
+                Console.WriteLine("Read file success!!\n" + data);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(string.Format("Read file fails!!\nError: {0} ", ex.Message));
+            }
         }
     }
 
