@@ -9,7 +9,9 @@ namespace Lab5
     {
         static void Main(string[] args)
         {
-            Client.ClientStart();
+            //Message send to server
+            string MESSAGE = "Nguyen Tat Thanh";
+            Client.ClientStart(MESSAGE);
         }
 
         /// <summary>
@@ -19,13 +21,16 @@ namespace Lab5
         {
             //Server port to connect
             public const int PORT_NUMBER = 9999;
+
             //Server ipddress
             public const string IP_ADDRESS = "127.0.0.1";
 
             //Time out for responsing message from server
             public const int RESPONSE_TIME_OUT = 10000;//10 Seconds
+
             //Time for sending
             public const int SENDING_TIME = 60000;// 1 minutes
+
             //Count time to send data
             public const int COUNT_TIME = 3;
         }
@@ -43,7 +48,7 @@ namespace Lab5
             /// <summary>
             /// Client start
             /// </summary>
-            public static void ClientStart()
+            public static void ClientStart(string message)
             {
                 try
                 {
@@ -51,7 +56,7 @@ namespace Lab5
 
                     Console.WriteLine("Client connected!!");
                     //Start thread sending data
-                    Thread tSendData = new Thread(() => SendData(clientSocket, "Nguyen Tat Thanh"));
+                    Thread tSendData = new Thread(() => SendData(clientSocket, message));
                     tSendData.Start();
                     //Start thread receive data
                     Thread tReceiveData = new Thread(() => ReceiveData(clientSocket));
