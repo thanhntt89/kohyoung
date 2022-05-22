@@ -1224,7 +1224,10 @@
 							"name": "UnitId",
 							"type": "INTEGER",
 							"length": 0,
-							"foreignKey": true
+							"foreignKey": true,
+							"referenceTo": {
+								"$ref": "AAAAAAGA67oGaa2oE44="
+							}
 						},
 						{
 							"_type": "ERDColumn",
@@ -1327,7 +1330,10 @@
 							"name": "UserId",
 							"type": "INTEGER",
 							"length": 0,
-							"foreignKey": true
+							"foreignKey": true,
+							"referenceTo": {
+								"$ref": "AAAAAAGA67X5uK1E3Os="
+							}
 						},
 						{
 							"_type": "ERDColumn",
@@ -1412,7 +1418,10 @@
 							"name": "ItemId",
 							"type": "INTEGER",
 							"length": 0,
-							"foreignKey": true
+							"foreignKey": true,
+							"referenceTo": {
+								"$ref": "AAAAAAGA67jNwa1+wtY="
+							}
 						},
 						{
 							"_type": "ERDColumn",
@@ -1423,7 +1432,10 @@
 							"name": "UserId",
 							"type": "INTEGER",
 							"length": 0,
-							"foreignKey": true
+							"foreignKey": true,
+							"referenceTo": {
+								"$ref": "AAAAAAGA67X5uK1E3Os="
+							}
 						},
 						{
 							"_type": "ERDColumn",
