@@ -87,6 +87,7 @@ System.Reflection.Assembly.GetExecutingAssembly().Location));
         /// Read person from files
         /// </summary>
         /// <param name="readerPath">File input</param>
+        /// <returns>Person</returns>
         public static Person ReadPerson(string readerPath)
         {     
             try
@@ -96,6 +97,7 @@ System.Reflection.Assembly.GetExecutingAssembly().Location));
             catch (Exception ex)
             {
                 Console.WriteLine(string.Format("Read file fails!!\nError: {0} ", ex.Message));
+                //Return new object
                 return new Person();
             }
         }
