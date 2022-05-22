@@ -54,6 +54,7 @@ namespace Lab5
                 {
                     clientSocket.Connect(Settings.IP_ADDRESS, Settings.PORT_NUMBER);
 
+                    //Set timeout receive data
                     clientSocket.ReceiveTimeout = Settings.RESPONSE_TIME_OUT;
 
                     Console.WriteLine("Client connected!!");
@@ -137,7 +138,7 @@ namespace Lab5
                         byte[] outStream = Encoding.ASCII.GetBytes(message + "$");
                         serverStream.Write(outStream, 0, outStream.Length);
                         serverStream.Flush();
-                        Console.WriteLine("Send success!!!");
+                        Console.WriteLine("Send success!!!\nData: " + message);
 
                         //sending count
                         if (IS_COUNT_TIME)

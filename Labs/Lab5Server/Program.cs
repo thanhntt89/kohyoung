@@ -80,7 +80,7 @@ namespace Lab5Server
                         if (Settings.IS_RECEIVING)
                             ReceiveData(clientSocket, ref serverResponse);
 
-                        if (Settings.IS_SENDING)
+                        if (Settings.IS_SENDING && !string.IsNullOrWhiteSpace(serverResponse))
                             SendData(clientSocket, serverResponse);
                     }
                     catch (Exception ex)
@@ -135,7 +135,7 @@ namespace Lab5Server
                     networkStream.Write(sendBytes, 0, sendBytes.Length);
                     networkStream.Flush();
 
-                    Console.WriteLine(" >> Server Send: " + message);
+                    Console.WriteLine(" >>Server Send: " + message);
                 }
                 catch (Exception ex)
                 {
