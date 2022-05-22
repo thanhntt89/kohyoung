@@ -17,12 +17,35 @@ namespace Lab3
             Person person = new Person() { Id = 20072597, FristName = "Thanh", LastName = "Nguyen Tat " };
 
             //Save struct
-            PersonBusiness.SavePerson(person, saveToFilePath);
+            SavePerson(person, saveToFilePath);
 
             //Read struct           
             ReadPerson(saveToFilePath);
 
             Console.ReadLine();
+        }
+
+        /// <summary>
+        /// Save person
+        /// </summary>
+        /// <param name="person">Person struct</param>
+        /// <param name="saveToFilePath">file path</param>
+        static void SavePerson(Person person, string saveToFilePath)
+        {
+            try
+            {
+                if (File.Exists(saveToFilePath))
+                {
+                    File.Delete(saveToFilePath);
+                }
+
+                PersonBusiness.SavePerson(person, saveToFilePath);
+                Console.WriteLine(string.Format("Write to file success!!\nFilePath: {0} ", saveToFilePath));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(string.Format("Write to file fails!!\nError: {0} ", ex.Message));
+            }            
         }
 
         /// <summary>
@@ -65,7 +88,7 @@ namespace Lab3
         public static void SavePerson(Person person, string saveToFilePath)
         {
             try
-            {
+            {               
                 using (Stream stream = new FileStream(saveToFilePath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
                 {
                     using (BinaryWriter writer = new BinaryWriter(stream, Encoding.Default))
@@ -74,12 +97,10 @@ namespace Lab3
                         writer.Write(newBuffer);
                     }
                 }
-
-                Console.WriteLine(string.Format("Write to file success!!\nFilePath: {0} ", saveToFilePath));
             }
             catch (Exception ex)
             {
-                Console.WriteLine(string.Format("Write to file fails!!\nError: {0} ", ex.Message));
+                throw new Exception(ex.Message);
             }
         }
 
@@ -89,16 +110,14 @@ namespace Lab3
         /// <param name="readerPath">File input</param>
         /// <returns>Person</returns>
         public static Person ReadPerson(string readerPath)
-        {     
+        {
             try
             {
                 return StructUtils.Deserialize<Person>(File.ReadAllBytes(readerPath));
             }
             catch (Exception ex)
             {
-                Console.WriteLine(string.Format("Read file fails!!\nError: {0} ", ex.Message));
-                //Return new object
-                return new Person();
+                throw new Exception(ex.Message);
             }
         }
     }
