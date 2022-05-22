@@ -34,11 +34,12 @@ namespace Lab3
         {
             try
             {
+                //Delete last file
                 if (File.Exists(saveToFilePath))
                 {
                     File.Delete(saveToFilePath);
                 }
-
+                //Save new file
                 PersonBusiness.SavePerson(person, saveToFilePath);
                 Console.WriteLine(string.Format("Write to file success!!\nFilePath: {0} ", saveToFilePath));
             }
@@ -62,6 +63,7 @@ namespace Lab3
             }
             try
             {
+                //Read data from file
                 Person person = PersonBusiness.ReadPerson(readerPath);
 
                 string data = string.Format("Id: {0} | First Name: {1} | Last Name: {2}\n", person.Id, person.FristName, person.LastName);
