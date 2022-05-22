@@ -10,6 +10,16 @@ namespace Lab4
         static string logPath = string.Format("{0}\\test.log", Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
         static void Main(string[] args)
         {
+            ReadFileLog(logPath);
+            Console.ReadLine();
+        }
+
+        /// <summary>
+        /// Read file log
+        /// </summary>
+        /// <param name="logPath"></param>
+        static void ReadFileLog(string logPath)
+        {
             //Check file not exist
             if (!File.Exists(logPath))
             {
@@ -29,8 +39,6 @@ namespace Lab4
             {
                 Console.WriteLine("Error: " + ex.Message);
             }
-
-            Console.ReadLine();
         }
     }
 }
