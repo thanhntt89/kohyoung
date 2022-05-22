@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
-namespace Lab12
+namespace Lab2
 {
     class Program
     {
+
         static void Main(string[] args)
         {
             //Create thread 
@@ -15,11 +20,12 @@ namespace Lab12
             tOdd.Start();
             //Run thread Even
             tEven.Start();
-            //Wait for all thread finished
-            tEven.Join();
-            tOdd.Join();          
 
-            Console.WriteLine("All thread terminated!!!");
+            //Waiting for all thread ending
+            tOdd.Join();
+            tEven.Join();
+
+            Console.WriteLine("The program has been terminated!!!");
 
             //Keep open console
             Console.ReadLine();
@@ -38,7 +44,7 @@ namespace Lab12
                     Console.WriteLine("Even:" + i);
                 }
                 //Reduce cpu
-                Thread.Sleep(1000);
+                Thread.Sleep(1);
             }
         }
 
@@ -49,8 +55,8 @@ namespace Lab12
         {
             for (int i = 1; i <= 10; i++)
             {
-                //Lab 2: Break thread when value equal 5
-                if (i == 5) 
+                // When value equals 5 break 
+                if (i == 5)
                     break;
 
                 //Check value is odd

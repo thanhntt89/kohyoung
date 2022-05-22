@@ -46,7 +46,7 @@ namespace Lab3
             catch (Exception ex)
             {
                 Console.WriteLine(string.Format("Write to file fails!!\nError: {0} ", ex.Message));
-            }            
+            }
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Lab3
         public static void SavePerson(Person person, string saveToFilePath)
         {
             try
-            {               
+            {
                 using (Stream stream = new FileStream(saveToFilePath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
                 {
                     using (BinaryWriter writer = new BinaryWriter(stream, Encoding.Default))
