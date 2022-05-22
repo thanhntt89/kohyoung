@@ -17,7 +17,7 @@ System.Reflection.Assembly.GetExecutingAssembly().Location));
             Person person = new Person() { Id = 20072597, FristName = "Thanh", LastName = "Nguyen Tat " };
 
             //Save struct
-            SavePerson(person, saveToFilePath);
+            PersonBusiness.SavePerson(person, saveToFilePath);
 
             //Read struct           
             ReadPerson(saveToFilePath);
@@ -26,11 +26,43 @@ System.Reflection.Assembly.GetExecutingAssembly().Location));
         }
 
         /// <summary>
+        /// Read person from files
+        /// </summary>
+        /// <param name="readerPath">File input</param>
+        static void ReadPerson(string readerPath)
+        {
+            //Check file exist
+            if (!File.Exists(readerPath))
+            {
+                Console.WriteLine(string.Format("File path: {0} not exist!!!", readerPath));
+                return;
+            }
+            try
+            {
+                Person person = PersonBusiness.ReadPerson(readerPath);
+
+                string data = string.Format("Id: {0} | First Name: {1} | Last Name: {2}\n", person.Id, person.FristName, person.LastName);
+
+                Console.WriteLine("Read file success!!\nData - " + data);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(string.Format("Read file fails!!\nError: {0} ", ex.Message));
+            }
+        }
+    }
+
+    /// <summary>
+    /// Person business
+    /// </summary>
+    public class PersonBusiness
+    {
+        /// <summary>
         /// Write struct to files
         /// </summary>
         /// <param name="person"></param>
         /// <param name="saveToFilePath"></param>
-        static void SavePerson(Person person, string saveToFilePath)
+        public static void SavePerson(Person person, string saveToFilePath)
         {
             try
             {
@@ -55,25 +87,16 @@ System.Reflection.Assembly.GetExecutingAssembly().Location));
         /// Read person from files
         /// </summary>
         /// <param name="readerPath">File input</param>
-        static void ReadPerson(string readerPath)
-        {
-            //Check file exist
-            if (!File.Exists(readerPath))
-            {
-                Console.WriteLine(string.Format("File path: {0} not exist!!!", readerPath));
-                return;
-            }
+        public static Person ReadPerson(string readerPath)
+        {     
             try
             {
-                Person person = StructUtils.Deserialize<Person>(File.ReadAllBytes(readerPath));
-
-                string data = string.Format("Id:{0} | First Name:{1} | Last Name: {2}\n", person.Id, person.FristName, person.LastName);
-
-                Console.WriteLine("Read file success!!\n" + data);
+                return StructUtils.Deserialize<Person>(File.ReadAllBytes(readerPath));
             }
             catch (Exception ex)
             {
                 Console.WriteLine(string.Format("Read file fails!!\nError: {0} ", ex.Message));
+                return new Person();
             }
         }
     }
