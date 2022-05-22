@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -8,8 +9,7 @@ namespace Lab3
     class Program
     {
         //File path to save
-        private static string saveToFilePath = string.Format("{0}\\person.bin", Path.GetDirectoryName(
-System.Reflection.Assembly.GetExecutingAssembly().Location));
+        private static string saveToFilePath = string.Format("{0}\\person.bin", Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
 
         static void Main(string[] args)
         {
