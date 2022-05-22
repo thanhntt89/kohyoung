@@ -4,7 +4,7 @@ namespace Lab8Delegate
 {
     class Program
     {
-        //Define delegate function
+        //Define delegate 
         public delegate void DelegateShowMessage(string message);
 
         static void Main(string[] args)
@@ -21,10 +21,9 @@ namespace Lab8Delegate
         }
 
         /// <summary>
-        /// Function calculation for delegate
+        /// Define method for delegate
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="message">message</param>
         static void ShowMessage(string message)
         {
             Console.WriteLine(message);
@@ -33,9 +32,8 @@ namespace Lab8Delegate
         /// <summary>
         /// Method callback using for delegate
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="calculation"></param>
+        /// <param name="message">Message</param>
+        /// <param name="showMessage">Delegate</param>
         static void MethodWithCallback(string message, DelegateShowMessage showMessage)
         {
             showMessage(message);
