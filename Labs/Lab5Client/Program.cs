@@ -3,7 +3,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 
-namespace Lab5
+namespace Lab5Client
 {
     class Program
     {
