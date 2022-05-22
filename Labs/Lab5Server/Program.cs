@@ -52,6 +52,8 @@ namespace Lab5Server
 
                 //Response to clients
                 Response(clientSocket);
+
+                Console.ReadLine();
             }
 
             /// <summary>
@@ -62,12 +64,18 @@ namespace Lab5Server
             {
                 string serverResponse = string.Empty;
 
-                while (clientSocket.Connected)
+                while (true)
                 {
                     try
                     {
                         //Reset data 
                         serverResponse = string.Empty;
+
+                        if (!clientSocket.Connected)
+                        {
+                            Console.WriteLine("Response - Client closed!!!");
+                            break;
+                        }
 
                         if (Settings.IS_RECEIVING)
                             ReceiveData(clientSocket, ref serverResponse);
@@ -80,6 +88,8 @@ namespace Lab5Server
                         Console.WriteLine("Response - Error:" + ex.Message);
                     }
                 }
+
+                Console.WriteLine("Response - Stop!!");
             }
 
             /// <summary>
@@ -97,9 +107,11 @@ namespace Lab5Server
                     networkStream.Read(bytesFrom, 0, (int)clientSocket.ReceiveBufferSize);
                     string dataFromClient = Encoding.ASCII.GetString(bytesFrom);
                     if (dataFromClient.IndexOf("$") > 0)
+                    {
                         dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
-                    Console.WriteLine(" >> Data from client - " + dataFromClient);
-                    serverResponse = "Last Message from client " + dataFromClient;
+                        Console.WriteLine(" >> Data from client - " + dataFromClient);
+                        serverResponse = "Last Message from client " + dataFromClient;
+                    }
                 }
                 catch (Exception ex)
                 {
