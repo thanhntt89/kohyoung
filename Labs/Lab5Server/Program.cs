@@ -19,6 +19,12 @@ namespace Lab5Server
         {
             //SERVER PORT
             public const int PORT_NUMBER = 9999;
+
+            //Enable send data to client
+            public const bool IS_SENDING = true;
+
+            //Enable receive data from client
+            public const bool IS_RECEIVING = true;
         }
 
         /// <summary>
@@ -53,19 +59,21 @@ namespace Lab5Server
             /// </summary>
             /// <param name="clientSocket">Client</param>
             private static void Response(TcpClient clientSocket)
-            {              
+            {
                 string serverResponse = string.Empty;
 
-                while (true)
+                while (clientSocket.Connected)
                 {
                     try
                     {
                         //Reset data 
                         serverResponse = string.Empty;
-                        
-                        ReceiveData(clientSocket, ref serverResponse);
 
-                        SendData(clientSocket, serverResponse);
+                        if (Settings.IS_RECEIVING)
+                            ReceiveData(clientSocket, ref serverResponse);
+
+                        if (Settings.IS_SENDING)
+                            SendData(clientSocket, serverResponse);
                     }
                     catch (Exception ex)
                     {
@@ -88,7 +96,8 @@ namespace Lab5Server
                     byte[] bytesFrom = new byte[clientSocket.ReceiveBufferSize];
                     networkStream.Read(bytesFrom, 0, (int)clientSocket.ReceiveBufferSize);
                     string dataFromClient = Encoding.ASCII.GetString(bytesFrom);
-                    dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
+                    if (dataFromClient.IndexOf("$") > 0)
+                        dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
                     Console.WriteLine(" >> Data from client - " + dataFromClient);
                     serverResponse = "Last Message from client " + dataFromClient;
                 }

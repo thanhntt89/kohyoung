@@ -54,6 +54,8 @@ namespace Lab5
                 {
                     clientSocket.Connect(Settings.IP_ADDRESS, Settings.PORT_NUMBER);
 
+                    clientSocket.ReceiveTimeout = Settings.RESPONSE_TIME_OUT;
+
                     Console.WriteLine("Client connected!!");
                     //Start thread sending data
                     Thread tSendData = new Thread(() => SendData(clientSocket, message));
@@ -62,7 +64,9 @@ namespace Lab5
                     Thread tReceiveData = new Thread(() => ReceiveData(clientSocket));
                     tReceiveData.Start();
 
+                    //Waiting for end thread
                     tSendData.Join();
+                    //Waiting for end thread
                     tReceiveData.Join();
 
                     Console.ReadLine();
@@ -100,11 +104,9 @@ namespace Lab5
                     catch (Exception ex)
                     {
                         Console.WriteLine("ReceiveData - Exception: " + ex.Message);
-
-                        //Waitting for timeout
-                        Thread.Sleep(Settings.RESPONSE_TIME_OUT);
-                        //Enable count time to send data 
-                        IS_COUNT_TIME = true;
+                        if (ex.Message.Contains("time"))
+                            //Enable count time to send data 
+                            IS_COUNT_TIME = true;
                     }
                 }
 
