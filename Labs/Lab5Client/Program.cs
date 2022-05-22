@@ -15,7 +15,7 @@ namespace Lab5
         }
 
         /// <summary>
-        /// Setting info for client
+        /// Client Settings
         /// </summary>
         public class Settings
         {
