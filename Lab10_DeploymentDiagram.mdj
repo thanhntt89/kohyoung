@@ -1511,9 +1511,9 @@
 											"font": "Arial;13;1",
 											"left": 461,
 											"top": 416,
-											"width": 93.18994140625,
+											"width": 96.078125,
 											"height": 13,
-											"text": "Script copy file"
+											"text": "Script Move file"
 										},
 										{
 											"_type": "LabelView",
@@ -1546,7 +1546,7 @@
 									"font": "Arial;13;0",
 									"left": 456,
 									"top": 409,
-									"width": 103.18994140625,
+									"width": 106.078125,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGA8GJeLRq0/9M="
@@ -1630,7 +1630,7 @@
 							"containerChangeable": true,
 							"left": 456,
 							"top": 360,
-							"width": 103.18994140625,
+							"width": 106.078125,
 							"height": 75,
 							"stereotypeDisplay": "icon",
 							"nameCompartment": {
@@ -1767,7 +1767,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 422,
-									"top": 474,
+									"top": 475,
 									"width": 72.6298828125,
 									"height": 13,
 									"alpha": 2.284759838946565,
@@ -1790,7 +1790,7 @@
 									"visible": null,
 									"font": "Arial;13;0",
 									"left": 424,
-									"top": 486,
+									"top": 487,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -1811,7 +1811,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 398,
-									"top": 449,
+									"top": 450,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -1829,7 +1829,7 @@
 								"$ref": "AAAAAAGA8GJeLRqyUCU="
 							},
 							"lineStyle": 1,
-							"points": "455:434;359:503",
+							"points": "455:435;359:503",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGA8GK6rhsKQ7Y="
@@ -2307,7 +2307,7 @@
 					"_parent": {
 						"$ref": "AAAAAAGA8Fq/qxe74GI="
 					},
-					"name": "Script copy file",
+					"name": "Script Move file",
 					"ownedElements": [
 						{
 							"_type": "UMLDependency",
