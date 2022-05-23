@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
@@ -100,14 +101,20 @@ namespace Lab5Client
                         serverStream.Read(bytesFrom, 0, (int)clientSocket.ReceiveBufferSize);
                         string dataFromServer = Encoding.ASCII.GetString(bytesFrom);
                         dataFromServer = dataFromServer.Substring(0, dataFromServer.IndexOf("\0"));
-                        Console.WriteLine("ServerResponse: " + dataFromServer);                        
+                        Console.WriteLine("ServerResponse: " + dataFromServer);
                     }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("ReceiveData - Exception: " + ex.Message);
-                        if (ex.Message.Contains("time"))
-                            //Enable count time to send data 
-                            IS_COUNT_TIME = true;
+                    catch (IOException ex)
+                    {                        
+                        //Enable count time to send data 
+                        if (ex.InnerException is SocketException)
+                        {
+                            var sockEx = (SocketException)ex.InnerException;
+                            if (sockEx.SocketErrorCode == SocketError.TimedOut)
+                            {
+                                Console.WriteLine("ReceiveData - Exception: " + sockEx.Message);
+                                IS_COUNT_TIME = true;
+                            }
+                        }
                     }
                 }
 
