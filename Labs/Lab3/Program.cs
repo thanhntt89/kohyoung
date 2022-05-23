@@ -39,6 +39,7 @@ namespace Lab3
                 {
                     File.Delete(saveToFilePath);
                 }
+                Console.WriteLine(string.Format("Struct Person(Id = {0}, FristName = {1}, LastName = {2})", person.Id, person.FristName, person.LastName));
                 //Save new file
                 PersonBusiness.SavePerson(person, saveToFilePath);
                 Console.WriteLine(string.Format("Write to file success!!\nFilePath: {0} ", saveToFilePath));
