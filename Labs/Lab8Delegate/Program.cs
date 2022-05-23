@@ -6,16 +6,21 @@ namespace Lab8Delegate
     {
         //Define delegate 
         public delegate void DelegateShowMessage(string message);
+        public static event DelegateShowMessage showMessageEvent;
 
         static void Main(string[] args)
         {
             //Instantiate the delegate.
             DelegateShowMessage showMessage = ShowMessage;           
             //Call delegate
-            showMessage("Call delegate");
+            showMessage("Call delegate!!!");
 
             //Call deleaget from function callback
             MethodWithCallback("Call delegate by callback!!!", showMessage);
+
+            //Call delegate by envent
+            showMessageEvent += ShowMessage;
+            showMessageEvent("Call delegate by event!!!");
 
             Console.ReadLine();
         }
