@@ -100,7 +100,7 @@ namespace Lab5Client
                         serverStream.Read(bytesFrom, 0, (int)clientSocket.ReceiveBufferSize);
                         string dataFromServer = Encoding.ASCII.GetString(bytesFrom);
                         dataFromServer = dataFromServer.Substring(0, dataFromServer.IndexOf("\0"));
-                        Console.WriteLine("ServerResponse: " + dataFromServer);
+                        Console.WriteLine("ServerResponse: " + dataFromServer);                        
                     }
                     catch (Exception ex)
                     {
