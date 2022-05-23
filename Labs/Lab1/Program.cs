@@ -14,9 +14,8 @@ namespace Lab12
             //Run thread Odd
             tOdd.Start();
             //Run thread Even
-            tEven.Start();           
-            
-            //Keep open console
+            tEven.Start(); 
+
             Console.ReadLine();
         }
 
