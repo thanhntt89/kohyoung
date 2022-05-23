@@ -111,7 +111,7 @@ namespace Lab5Client
                             var sockEx = (SocketException)ex.InnerException;
                             if (sockEx.SocketErrorCode == SocketError.TimedOut)
                             {
-                                Console.WriteLine("ReceiveData - Exception: " + sockEx.Message);
+                                Console.WriteLine("ReceiveData - TimeOutException: " + sockEx.Message);
                                 IS_COUNT_TIME = true;
                             }
                         }
